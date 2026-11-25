@@ -134,10 +134,10 @@ theorem isUpUni_mul {n : ℕ} {x y : Matrix (Fin n) (Fin n) K} (hx : IsUpUni x)
   exact ⟨by simpa using (Matrix.blockTriangular_transpose_iff.mp h.1), h.2⟩
 
 theorem isLowUni_det {n : ℕ} {x : Matrix (Fin n) (Fin n) K} (hx : IsLowUni x) : x.det = 1 := by
-  simpa [hx.2] using Matrix.det_of_lowerTriangular x hx.1
+  simpa [hx.2] using Matrix.det_of_isLowerTriangular x hx.1
 
 theorem isUpUni_det {n : ℕ} {x : Matrix (Fin n) (Fin n) K} (hx : IsUpUni x) : x.det = 1 := by
-  simpa [hx.2] using Matrix.det_of_upperTriangular hx.1
+  simpa [hx.2] using Matrix.det_of_isUpperTriangular hx.1
 
 theorem isLowUni_inv {n : ℕ} {x : Matrix (Fin n) (Fin n) K} (hx : IsLowUni x) :
     IsLowUni x⁻¹ := by
