@@ -72,7 +72,7 @@ theorem measurable_modChar :
       fun g => (∫⁻ x, K.indicator 1 (x * g) ∂μ) / μ K := by
     funext g
     have e := congrArg (fun m : Measure G => m K) (map_mul_right_eq μ g)
-    simp only [Measure.smul_apply, ENNReal.smul_def, smul_eq_mul] at e
+    simp only [smul_apply, ENNReal.smul_def, smul_eq_mul] at e
     rw [Measure.map_apply (measurable_mul_const g) hK.measurableSet] at e
     rw [ENNReal.eq_div_iff hpos hfin, mul_comm, ← e,
       ← lintegral_indicator_one (hK.measurableSet.preimage (measurable_mul_const g))]
@@ -93,7 +93,7 @@ theorem modChar_eq_one (H : Subgroup G) (ν : Measure H) [ν.IsMulLeftInvariant]
   have hDm : Measurable D := by
     rw [show D = fun h : H => (Measure.modularCharacterFun (h : G) : ℝ) from funext hD]
     exact measurable_coe_nnreal_real.comp
-      ((measurable_coe_nnreal_ennreal_iff.1 measurable_modChar).comp measurable_subtype_coe)
+      ((measurable_coe_nnreal_ennreal_iff.1 measurable_modChar).comp measurable_subtypeVal)
   have hmul : ∀ a b : H, D (a * b) = D a * D b := by
     intro a b
     have e : Measure.modularCharacterFun ((a : G) * b) =
@@ -139,7 +139,7 @@ theorem modChar_eq_one (H : Subgroup G) (ν : Measure H) [ν.IsMulLeftInvariant]
     have e : {h : H | ⌊Real.log (D h) / t⌋ = m + 1} =
         (fun h => k⁻¹ * h) ⁻¹' {h : H | ⌊Real.log (D h) / t⌋ = m} := by
       ext h
-      simp only [Set.mem_setOf_eq, Set.mem_preimage, hN]
+      simp only [Set.mem_ofPred_eq, Set.mem_preimage, hN]
       constructor <;> intro hh <;> omega
     rw [e, measure_preimage_mul]
   have hall : ∀ m : ℤ, ν {h : H | ⌊Real.log (D h) / t⌋ = m} =
@@ -178,7 +178,7 @@ theorem lintegral_mul_right_of_mem (μ : Measure G) [μ.IsHaarMeasure] (H : Subg
 theorem meas_avg (H : Subgroup G) (ν : Measure H) [SFinite ν] {f : G → ℝ≥0∞} (hf : Measurable f) :
     Measurable (fun g : G => ∫⁻ h, f (g * (h : G)) ∂ν) := by
 
-  exact (hf.comp (measurable_fst.mul (measurable_subtype_coe.comp measurable_snd))).lintegral_prod_right'
+  exact (hf.comp (measurable_fst.mul (measurable_subtypeVal.comp measurable_snd))).lintegral_prod_right'
 
 theorem avg_mul_mem (H : Subgroup G) (ν : Measure H) [ν.IsMulLeftInvariant] (f : G → ℝ≥0∞)
     (g : G) (k : H) : ∫⁻ h, f (g * k * (h : G)) ∂ν = ∫⁻ h, f (g * (h : G)) ∂ν := by
@@ -296,7 +296,7 @@ theorem unfold_stab (x0 : X) (hc : Continuous fun g : G => g • x0) (μ : Measu
   rw [lintegral_map (meas_avg_q (MulAction.stabilizer G x0) ν hf) hmk]
   simp only [avg_out]
   rw [lintegral_lintegral_swap (f := fun (g : G) (h : MulAction.stabilizer G x0) => f (g * (h : G)))
-    ((hf.comp (measurable_fst.mul (measurable_subtype_coe.comp measurable_snd))).aemeasurable)]
+    ((hf.comp (measurable_fst.mul (measurable_subtypeVal.comp measurable_snd))).aemeasurable)]
   simp only [hinner, lintegral_const]
   rw [mul_comm (∫⁻ g, f g ∂μ), ← mul_assoc, ENNReal.inv_mul_cancel h0 hfin, one_mul]
 
