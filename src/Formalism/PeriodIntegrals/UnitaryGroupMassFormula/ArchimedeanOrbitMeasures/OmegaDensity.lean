@@ -104,7 +104,7 @@ def lieU (P Q : ℕ) : Submodule ℝ (Matrix (Fin P ⊕ Fin Q) (Fin P ⊕ Fin Q)
   zero_mem' := by simp
   add_mem' := by
     intro X Y hX hY
-    simp only [Set.mem_setOf_eq] at *
+    simp only [Set.mem_ofPred_eq] at *
     rw [Matrix.conjTranspose_add, Matrix.add_mul, Matrix.mul_add]
     calc Xᴴ * HcS.UG.Jpq P Q + Yᴴ * HcS.UG.Jpq P Q + (HcS.UG.Jpq P Q * X + HcS.UG.Jpq P Q * Y)
         = (Xᴴ * HcS.UG.Jpq P Q + HcS.UG.Jpq P Q * X) + (Yᴴ * HcS.UG.Jpq P Q + HcS.UG.Jpq P Q * Y) := by
@@ -112,7 +112,7 @@ def lieU (P Q : ℕ) : Submodule ℝ (Matrix (Fin P ⊕ Fin Q) (Fin P ⊕ Fin Q)
       _ = 0 := by rw [hX, hY, add_zero]
   smul_mem' := by
     intro c X hX
-    simp only [Set.mem_setOf_eq] at *
+    simp only [Set.mem_ofPred_eq] at *
     rw [Matrix.conjTranspose_smul, Matrix.smul_mul, Matrix.mul_smul, star_trivial, ← smul_add, hX,
       smul_zero]
 
