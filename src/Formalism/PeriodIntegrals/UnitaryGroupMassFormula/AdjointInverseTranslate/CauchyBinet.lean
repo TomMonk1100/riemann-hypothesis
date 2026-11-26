@@ -102,7 +102,7 @@ theorem grouping {A : Type*} [Ring A] [Algebra ℂ A] {t N : ℕ} (κ : Fin N �
       exact congrArg κ (congrFun heq' x)
     have e2 : (fun l => κ (C l)) = (fun l => κ (C' l)) := by
       first
-      | exact (StrictMono.range_inj hC hC').1 e1
+      | exact (StrictMono.range_inj_of_wellFoundedLT hC hC').1 e1
     have e3 : C = C' := funext fun l => hκ (congrFun e2 l)
     subst e3
     have e4 : σ = σ' := Equiv.ext fun x => hC.injective (congrArg κ (congrFun heq' x))
