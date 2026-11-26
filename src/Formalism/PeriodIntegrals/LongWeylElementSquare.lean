@@ -89,7 +89,7 @@ def LmL (k r : ℕ) : (Mat k r × (Fin r → ℂ) × Mat k r × Mat k r) →ₗ[
   map_add' p q := by
     have : tD k r (p.2.1 + q.2.1) = tD k r p.2.1 + tD k r q.2.1 := by
       unfold tD; rw [Matrix.diagonal_add]; congr 1; funext i; unfold dv
-      split_ifs <;> simp [star_add] <;> ring
+      split_ifs <;> simp [star_add]; ring
     simp only [Prod.fst_add, Prod.snd_add, this, Matrix.mul_add, Matrix.add_mul]
     abel
   map_smul' c p := by
