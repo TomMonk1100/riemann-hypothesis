@@ -105,7 +105,7 @@ lemma coeMatrix_inv_eq {n : ℕ} (ε : Fin n → Bool) (g : UJ ε) :
     (((g : (Matrix (Fin n) (Fin n) ℂ)ˣ)⁻¹ : (Matrix (Fin n) (Fin n) ℂ)ˣ) : Matrix (Fin n) (Fin n) ℂ)
       = Jm ε * (coeMatrixAlt ε g)ᴴ * Jm ε := Units.inv_eq_of_mul_eq_one_left (coeMatrix_left_inv ε _ g.2)
 
-lemma continuous_coeMatrix {n : ℕ} (ε : Fin n → Bool) : Continuous (coeMatrixAlt ε) := Units.continuous_val.comp continuous_subtype_val
+lemma continuous_coeMatrix {n : ℕ} (ε : Fin n → Bool) : Continuous (coeMatrixAlt ε) := Units.continuous_val.comp continuous_subtypeVal
 
 lemma isClosed_pseudoUnitary {n : ℕ} (ε : Fin n → Bool) :
     IsClosed {g : Matrix (Fin n) (Fin n) ℂ | inUJ ε g} := by
